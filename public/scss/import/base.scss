@@ -1,9 +1,11 @@
 body{
-
+    background: #eee;
 
     header{
         padding: .5em 2rem;
         background: #fff;
+        border-bottom: solid 1px #ddd;
+
     }
 
 
@@ -17,18 +19,19 @@ body{
         display: flex;
         justify-content: center;
 
-        width: 100%;
+        width: 1200px;
         min-height: 100vh;
+        margin: 0 auto;
         padding: 2em 0;
         box-sizing: border-box;
-        background: #ddd;
 
 
 
 
         .center_container{
-            max-width: 800px;
+            width: 800px;
             box-sizing: border-box;
+            border: solid 1px #ddd;
             border-radius: .5rem;
             background: #fff;
 
@@ -40,6 +43,7 @@ body{
         .side_container{
             width: 400px;
             height: 100px;
+            border: solid 1px #ddd;
             border-radius: .5rem;
             background: #fff;
         }
@@ -57,6 +61,7 @@ body{
         line-height: 2em;
         text-align: center;
         background: #fff;
+        border-top: solid 1px #ddd;
     }
 
 

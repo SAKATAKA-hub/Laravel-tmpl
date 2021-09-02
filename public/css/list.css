@@ -102,7 +102,7 @@ body button:hover {
   padding: 2rem;
 }
 .center_container table {
-  font-size: 11px;
+  width: 100%;
 }
 .center_container table .list_group {
   border-top: solid 1px #eee;
@@ -132,4 +132,4 @@ body button:hover {
   text-align: center;
 }
 
-/*# sourceMappingURL=form.css.map */
+/*# sourceMappingURL=list.css.map */

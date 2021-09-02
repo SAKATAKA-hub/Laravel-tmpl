@@ -15,12 +15,13 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->comment('氏名');
-            $table->string('email')->comment('メールアドレス');
-            $table->string('image')->comment('画像')->nullable()->default(null);
-            $table->string('divises')->comment('ディバイス')->nullable()->default(null);
-            $table->string('gender')->comment('性別');
-            $table->string('age_group')->comment('電話番号');
+            $table->string('name',50)->comment('氏名');
+            $table->string('email',50)->comment('メールアドレス');
+            $table->string('image',100)->comment('画像')->nullable()->default(null);
+            $table->string('divises',50)->comment('ディバイス')->nullable()->default(null);
+            $table->string('gender',50)->comment('性別');
+            $table->string('age_group',50)->comment('電話番号');
+            $table->string('remarks',)->comment('特記事項')->nullable()->default('特になし。');
             $table->timestamps();
         });
     }

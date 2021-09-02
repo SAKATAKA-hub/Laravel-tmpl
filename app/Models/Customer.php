@@ -11,7 +11,7 @@ class Customer extends Model
 
     # データ挿入設定
     protected $fillable = [
-        'name','email','image','divises','gender','age_group',
+        'name','email','image','divises','gender','age_group','remarks',
     ];
 
     public $timestamps = true;

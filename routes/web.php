@@ -15,35 +15,35 @@ use App\Http\Controllers\FormController;
 */
 # お客様情報一覧の表示(list)
 Route::get('/form/list', [FormController::class, 'list'])
-    ->name('Form.list');
+    ->name('form.list');
 
 
 # お客様情報の表示
-Route::get('/form/show/{post}', [FormController::class, 'show'])
-    ->name('Form.show');
+Route::get('/form/show/{customer}', [FormController::class, 'show'])
+    ->name('form.show');
 
 
 # 新規登録
 // ページの表示
 Route::get('/form/create', [FormController::class, 'create'])
-    ->name('Form.create');
+    ->name('form.create');
 
 // 処理
 Route::post('/form/store', [FormController::class, 'store'])
-    ->name('Form.store');
+    ->name('form.store');
 
 
 # 登録内容編集
 // ページの表示
-Route::get('/form/edit/{post}', [FormController::class, 'edit'])
-    ->name('Form.edit');
+Route::get('/form/edit/{customer}', [FormController::class, 'edit'])
+    ->name('form.edit');
 
 // 処理
-Route::patch('/form/update/{post}', [FormController::class, 'update'])
-    ->name('Form.update');
+Route::patch('/form/update/{customer}', [FormController::class, 'update'])
+    ->name('form.update');
 
 
 # 登録内容削除処理
-Route::delete('/form/destroy/{post}', [FormController::class, 'destroy'])
-    ->name('Form.destroy');
+Route::delete('/form/destroy/{customer}', [FormController::class, 'destroy'])
+    ->name('form.destroy');
 

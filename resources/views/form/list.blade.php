@@ -11,15 +11,17 @@
 
 
 @section('style')
-<link href="{{ asset('css/form.css') }}" rel="stylesheet">
-<link href="{{ asset('css/app.css') }}" rel="stylesheet"> <!-- bootstrap -->
+<link href="{{ asset('css/list.css') }}" rel="stylesheet">
+<!-- bootstrap -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 @endsection
 
 
 
 
 @section('script')
-<script src="{{ asset('js/app.js') }}"></script> <!-- bootstrap -->
+{{-- javascript なし --}}
 @endsection
 
 
@@ -43,7 +45,7 @@
         @forelse ($customers as $customer)
         <tr class="list_group">
             <td>
-                <img class="list_image">
+                <img class="list_image" src="{{ asset($customer->image) }}">
             </td>
             <td>
                 <div class="list_title">{{ $customer->name }}</div>
@@ -58,13 +60,15 @@
                 <div class="list_updated_at">20**年00月00日に更新</div>
             </td>
             <td>
-                <a href=""><button>一覧</button></a>
+                <a href="{{ route('form.show',$customer) }}"><button>詳細</button></a>
             </td>
             <td>
-                <a href=""><button>編集</button></a>
+                <a href="{{ route('form.edit',$customer) }}"><button>編集</button></a>
             </td>
             <td>
-                <form action="">
+                <form action="{{ route('form.destroy',$customer) }}" method="POST">
+                    @method('DELETE')
+                    @csrf
                     <button>削除</button>
                 </form>
             </td>
@@ -79,8 +83,7 @@
 
 
     <div class="list_foot">
-        {{ $customers->links() }}
+        {{ $customers->links('includes.pagination.oliginal') }}
     </div>
-
 
 @endsection
