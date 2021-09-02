@@ -1,0 +1,128 @@
+@charset "UTF-8";
+/*
+/-------------------------------------------------------------------------
+/ リセットCSS
+/-------------------------------------------------------------------------
+*/
+body {
+  font-family: "游ゴシック体", "Yu Gothic", YuGothic, "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo", "sans-serif";
+}
+
+body, h1, h2, h3, h4, ul, ol, li, a, p, div, nav, figure, article, section, i {
+  margin: 0 0;
+  padding: 0 0;
+}
+
+/* h1,h2,h3,h4,h5,h6{font-size: 100%;} */
+table {
+  border-collapse: collapse;
+  /*隣り合うセルの境界線を重ねて表示*/
+  border-spacing: 0;
+  /*境界線の感覚を無くす*/
+}
+
+img {
+  border: none;
+  /*枠線を消す*/
+  vertical-align: bottom;
+  /*画像下の余白を消す*/
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+body header {
+  padding: .5em 2rem;
+  background: #fff;
+}
+body main {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 2em 0;
+  box-sizing: border-box;
+  background: #ddd;
+}
+body main .center_container {
+  max-width: 800px;
+  box-sizing: border-box;
+  border-radius: .5rem;
+  background: #fff;
+  margin-right: 1rem;
+}
+body main .side_container {
+  width: 400px;
+  height: 100px;
+  border-radius: .5rem;
+  background: #fff;
+}
+body footer {
+  height: 2em;
+  line-height: 2em;
+  text-align: center;
+  background: #fff;
+}
+body button {
+  margin: .2em;
+  padding: .5em 1em;
+  border: solid 1px #ddd;
+  border-radius: .3em;
+  background: #fff;
+  font-size: 1em;
+}
+body button:hover {
+  background: #f2f2f2;
+}
+
+.center_container .list_head {
+  padding: 2rem;
+}
+.center_container table {
+  font-size: 11px;
+}
+.center_container table .list_group {
+  border-top: solid 1px #eee;
+}
+.center_container table td:nth-child(1) {
+  padding-left: 1rem;
+}
+.center_container table td {
+  padding: .5rem 1rem .5rem 0;
+}
+.center_container table .list_image {
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: .8em;
+  border: solid 1px #bbb;
+  display: block;
+}
+.center_container table .list_title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.center_container table .list_updated_at {
+  color: #aaa;
+}
+.center_container .list_foot {
+  padding: 2rem;
+  text-align: center;
+}
+
+/*# sourceMappingURL=form.css.map */

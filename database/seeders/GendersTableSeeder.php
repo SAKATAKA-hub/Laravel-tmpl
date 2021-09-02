@@ -1,0 +1,42 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\Gender;
+
+class GendersTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $items =[
+            [
+                'value' => 'woman',
+                'text' => '女性',
+            ],
+            [
+                'value' => 'man',
+                'text' => '男性',
+            ],
+            [
+                'value' => 'other',
+                'text' => 'その他',
+            ],
+        ];
+
+        foreach ($items as $item)
+        {
+            $data = new Gender([
+                'name' => 'gender',
+                'value' => $item['value'],
+                'text' => $item['text'],
+            ]);
+            $data->save();
+        }
+    }
+}

@@ -1,0 +1,81 @@
+body{
+
+
+    header{
+        padding: .5em 2rem;
+        background: #fff;
+    }
+
+
+
+
+
+
+
+
+    main{
+        display: flex;
+        justify-content: center;
+
+        width: 100%;
+        min-height: 100vh;
+        padding: 2em 0;
+        box-sizing: border-box;
+        background: #ddd;
+
+
+
+
+        .center_container{
+            max-width: 800px;
+            box-sizing: border-box;
+            border-radius: .5rem;
+            background: #fff;
+
+            margin-right: 1rem;
+        }
+
+
+
+        .side_container{
+            width: 400px;
+            height: 100px;
+            border-radius: .5rem;
+            background: #fff;
+        }
+    }
+
+
+
+
+
+
+
+
+    footer{
+        height: 2em;
+        line-height: 2em;
+        text-align: center;
+        background: #fff;
+    }
+
+
+
+
+
+
+
+
+    button{
+        margin: .2em;
+        padding: .5em 1em;
+        border: solid 1px #ddd;
+        border-radius: .3em;
+        background: #fff;
+        font-size: 1em;
+    }
+    button:hover{
+        background: darken(#fff,5%)
+    }
+
+}

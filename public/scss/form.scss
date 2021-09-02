@@ -1,0 +1,61 @@
+
+
+@import"import/reset_css";
+@import"import/base";
+
+
+
+.center_container{
+
+
+
+
+    .list_head{
+        padding: 2rem;
+    }
+
+
+
+
+    table{
+        font-size: 11px;
+
+
+        .list_group{
+            border-top: solid 1px #eee;
+        }
+        td:nth-child(1){
+            padding-left: 1rem;
+        }
+        td{
+            padding: .5rem 1rem .5rem 0;
+        }
+
+        .list_image{
+            width: 1.6em;
+            height: 1.6em;
+            border-radius: .8em;
+            border: solid 1px #bbb;
+            display: block;
+        }
+
+        .list_title{
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .list_updated_at{
+            color: #aaa;
+        }
+    }
+
+
+
+
+    .list_foot{
+        padding: 2rem ;
+        text-align: center;
+    }
+
+
+
+}
