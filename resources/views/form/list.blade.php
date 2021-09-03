@@ -15,6 +15,15 @@
 <!-- bootstrap -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+<style>
+    .popup_message{
+        width: 100%;
+        line-height: 2em;
+        padding-left: 2em;
+        background: lightsalmon;
+        font-weight: bold;
+    }
+</style>
 @endsection
 
 
@@ -32,8 +41,15 @@
 
 
 @section('main.center_contents')
+
+
+    @if ( session('popup_message') )
+        <div class="popup_message">{{ session('popup_message') }}</div>
+    @endif
+
     <div class="list_head">
         <h2>お客様情報一覧</h2>
+        <a href="{{route('form.create')}}"><button>新規登録</button></a>
     </div>
 
 
@@ -45,7 +61,7 @@
         @forelse ($customers as $customer)
         <tr class="list_group">
             <td>
-                <img class="list_image" src="{{ asset($customer->image) }}">
+                <img class="list_image" src="{{ asset('storage/'.$customer->image) }}">
             </td>
             <td>
                 <div class="list_title">{{ $customer->name }}</div>

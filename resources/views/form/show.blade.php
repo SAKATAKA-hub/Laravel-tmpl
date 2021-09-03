@@ -36,7 +36,7 @@
 
     <div class="item_group">
         <div class="item_name">画像</div>
-        <img class="item_image" src="{{ asset($customer->image) }}">
+        <img class="item_image" src="{{ asset('storage/'.$customer->image) }}">
     </div>
 
 
@@ -54,7 +54,7 @@
 
     <div class="item_group">
         <div class="item_name">お持ちのディバイス</div>
-        <div class="item_value">{{ $customer->divises }}</div>
+        <div class="item_value">{{ $customer->divises!=''? $customer->divises: 'なし' }}</div>
     </div>
 
 

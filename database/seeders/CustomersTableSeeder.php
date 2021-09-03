@@ -45,7 +45,7 @@ class CustomersTableSeeder extends Seeder
 
                 'email' => str_replace(' ','_',$person['alp']).'@email.co.jp',
 
-                'image' => 'storage/customer_img/'.sprintf('%04d.png',$i),
+                'image' => 'upload/customer_img/'.sprintf('%04d.png',$i),
 
                 'divises' => \App\Models\Divise::getRandValue(), //ランダムなディバイスの種類の値
 

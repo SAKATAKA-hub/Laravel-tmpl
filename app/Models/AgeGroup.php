@@ -19,10 +19,48 @@ class AgeGroup extends Model
 
 
 
+
     # ローカルスコープ
 
     /**
-     * 年代グループのランダムな値を返す
+     * フォームの'セレクト要素'で利用するアイテムの配列を返すスコープ
+     *
+     * 要素が以前選択されているとき、trueの'1'が'selected'キーに記録される
+     *
+     *
+     * @return Array
+     */
+    public function scopeGetSelectElements($query, $customer)
+    {
+        $field = 'age_group';
+
+        $elements = $query->get();
+
+
+
+        if($customer)
+        {
+
+
+            foreach($elements as $element)
+            {
+                if($customer[$field] == $element['value'])
+                {
+                    $element['selected'] = 1;
+                    break;
+                }
+            }
+
+
+        }
+        return $elements;
+    }
+
+
+
+
+    /**
+     * 年代グループのランダムな値を返すスコープ
      *
      * @return String
      */
@@ -39,4 +77,6 @@ class AgeGroup extends Model
 
         return $value_array[mt_rand(0,$n)];
     }
+
+
 }

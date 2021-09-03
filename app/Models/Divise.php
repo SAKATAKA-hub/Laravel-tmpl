@@ -22,6 +22,48 @@ class Divise extends Model
     # ローカルスコープ
 
     /**
+     * フォームの'チェックボックス要素'で利用するアイテムの配列を返すスコープ
+     *
+     * 要素が以前選択されているとき、trueの'1'が'checked'キーに記録される
+     *
+     *
+     * @return Array
+     */
+    public function scopeGetCheckboxElements($query, $customer)
+    {
+        $field = 'divises';
+
+        $elements = $query->get();
+
+
+        if($customer)
+        {
+
+
+            $checked_items = explode(' ',$customer[$field]); //チェックした複数の'値'を配列に保存
+
+            foreach($elements as $element)
+            {
+                foreach($checked_items as $checked_item)
+                {
+                    if($checked_item == $element['value'])
+                    {
+                        $element['checked'] = 1;
+                    }
+                }
+            }
+
+
+        }
+
+        return $elements;
+    }
+
+
+
+
+
+    /**
      * ディバイスの種類からのランダムな値を返す
      *
      * @return String

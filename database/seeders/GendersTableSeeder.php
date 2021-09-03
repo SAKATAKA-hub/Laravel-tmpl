@@ -15,18 +15,9 @@ class GendersTableSeeder extends Seeder
     public function run()
     {
         $items =[
-            [
-                'value' => 'woman',
-                'text' => '女性',
-            ],
-            [
-                'value' => 'man',
-                'text' => '男性',
-            ],
-            [
-                'value' => 'other',
-                'text' => 'その他',
-            ],
+            ['value' => '女性','text' => '女性'],
+            ['value' => '男性','text' => '男性'],
+            ['value' => 'その他','text' => 'その他'],
         ];
 
         foreach ($items as $item)
