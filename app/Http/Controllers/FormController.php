@@ -154,8 +154,11 @@ class FormController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(Customer $customer)
+    public function destroy(Request $request, Customer $customer)
     {
+        return $request->customer_id;
+
+
         // データの削除
         $customer->delete();
 

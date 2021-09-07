@@ -19,6 +19,22 @@ class Gender extends Model
 
 
 
+    # アクセサー
+    /**
+     * フォーム入力値とラベルを結びつける'ID'の値を返す
+     *
+     *
+     * @return String
+     */
+    public function getFormIdAttribute()
+    {
+
+        return 'formID'. ucfirst( $this->name ) .$this->id;
+    }
+
+
+
+
     # ローカルスコープ
 
     /**

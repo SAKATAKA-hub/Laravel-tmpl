@@ -12,77 +12,55 @@
 
 @section('style')
 <link href="{{ asset('css/form.css') }}" rel="stylesheet">
+<!-- bootstrap -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{{-- <style>
 
-{{--
-<style>
-    input[type="text"],input[type="email"],select,textarea{
-        padding: 1em;
+.form_head{
+    padding: 2rem;
+    text-align: center;
+}
+
+
+
+
+.form_group{
+    padding: 1em 3rem;
+    border-top: solid 1px #eee;
+}
+
+    .item_image{
+        width: 100px;
+        height: 100px;
+        margin-bottom: .5rem;
+        border-radius: 10px;
+        border: solid 1px #bbb;
+        display: block;
     }
 
 
-    .form_head{
-        padding: 2rem;
-        text-align: center;
-    }
 
 
-
-
-    .form_group{
-        padding: 1em 3rem;
-        border-top: solid 1px #eee;
-    }
-        .error_text{
-            color:red;
-            height:1em;
-        }
-        .form_name
-        {
-            margin-bottom: .5rem;
-        }
-        .form_value
-        {
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-        .item_image{
-            width: 100px;
-            height: 100px;
-            margin-bottom: .5rem;
-            border-radius: 10px;
-            border: solid 1px #bbb;
-            display: block;
-        }
-        textarea{
-            width: 100%;
-            height: 6em;
-        }
-
-
-
-
-
-    .submit_group{
-        margin-bottom: 1em;
-        text-align: center;
-    }
-        .submit_group button{
-            font-size: 1.2rem;
-            padding: .2em 2em;
-        }
-
-
-
-
+.submit_group{
+    margin-bottom: 1em;
+    text-align: center;
+}
 </style> --}}
-
 @endsection
 
 
 
 
 @section('script')
+<!-- bootstrap -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<!-- preview_image -->
 <script src="{{ asset('js/common/preview_image.js') }}"></script>
+{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+
 @endsection
 
 
@@ -118,83 +96,84 @@
                 <h2>お客様情報修正</h2>
             @endif
 
+            {{-- アラートメッセージ --}}
+            <div class=" alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+             </div>
+        </div>
+
+
+        <div class="form_group">
+             <!-- field_text -->
+            <label class="form-label" for="{{ $form_id['name'] }}">お名前 <span class="badge badge-danger">必須</span></label>
+
+            <!-- field_input -->
+            @if ($form == 'create')
+                <input class="form-control" type="text" name="name" value="{{ old('name')}}"" id="{{ $form_id['name'] }}" placeholder="苗字　名前" required>
+            @elseif ($form == 'edit')
+                <input class="form-control" type="text" name="name" value="{{ old('name', $customer->name) }}"" id="input_name" placeholder="苗字　名前" required>
+            @endif
+
+            <!-- error_text -->
+            <p style="color:red;margin-top:.5em;">jsエラーメッセージ</p>
+            <p class="error_text">
+                {{ $errors->has('name')? $errors->first('name'): '' }}
+            </p>
         </div>
 
 
 
 
         <div class="form_group">
-            <label>
-                <!-- field_text -->
-                <div class="form_name">お名前(必須)</div>
+            <!-- field_text -->
+            <label class="form-label" for="{{ $form_id['email'] }}">メールアドレス</label>
 
-                <!-- field_input -->
-                @if ($form == 'create')
-                    <input type="text" name="name" value="{{ old('name')}}" placeholder="苗字　名前" required>
-                @elseif ($form == 'edit')
-                    <input type="text" name="name" value="{{ old('name', $customer->name) }}" placeholder="苗字　名前" required>
-                @endif
+            <!-- field_input -->
+            @if ($form == 'create')
+                <input  class="form-control" type="email" name="email" value="{{ old('email')}}" id="{{ $form_id['email'] }}" placeholder="例)email@email.co.jp" required>
+            @elseif ($form == 'edit')
+                <input  class="form-control" type="email" name="email" value="{{ old('email', $customer->email) }}" id="{{ $form_id['email'] }}" placeholder="例)email@email.co.jp" required>
+            @endif
 
-                <!-- error_text -->
-                <p class="error_text">
-                    {{ $errors->has('name')? $errors->first('name'): '' }}
-                </p>
-            </label>
+            <!-- error_text -->
+            <p style="color:red;margin-top:.5em;">jsエラーメッセージ</p>
+            <p class="error_text">
+                {{ $errors->has('name')? $errors->first('name'): '' }}
+            </p>
         </div>
 
-
-
-
-        <div class="form_group">
-            <label>
-                <!-- field_text -->
-                <div class="form_name">メールアドレス(必須)</div>
-
-                <!-- field_input -->
-                @if ($form == 'create')
-                    <input type="email" name="email" value="{{ old('email')}}" placeholder="例)email@email.co.jp" required>
-                @elseif ($form == 'edit')
-                    <input type="email" name="email" value="{{ old('email', $customer->email) }}" placeholder="例)email@email.co.jp" required>
-                @endif
-
-                <!-- error_text -->
-                <p class="error_text">
-                    {{ $errors->has('email')? $errors->first('email'): '' }}
-                </p>
-
-            </label>
-        </div>
 
 
 
 
         {{-- 画像入力 --}}
         <div class="form_group">
-            <label>
-                <!-- field_text -->
-                <div class="form_name">画像</div>
+            <!-- field_text -->
+            <lavel class="form-label" for="{{ $form_id['image'] }}">画像</lavel>
 
-                <!-- image -->
-                @if ($form == 'create')
-                    <img id="preview" class="item_image">
-                @elseif ($form == 'edit')
-                    <img id="preview" class="item_image"  src="{{ asset('storage/'.$customer->image) }}">
-                    <input type="hidden" name="old_image" value = "{{$customer->image}}"> <!-- 以前登録した画像 -->
-                @endif
+            <!-- image -->
+            @if ($form == 'create')
+                <img id="preview" class="item_image">
+            @elseif ($form == 'edit')
+                <img id="preview" class="item_image"  src="{{ asset('storage/'.$customer->image) }}">
+                <input type="hidden" name="old_image" value = "{{$customer->image}}"> <!-- 以前登録した画像 -->
+            @endif
 
-                <!-- field_input -->
-                <input type="file" name="image" onchange="setImage(this);" onclick="this.value = '';">
+            <!-- field_input -->
+            <input class="form-control-file" type="file" name="image" id="{{ $form_id['image'] }}" onchange="setImage(this);" onclick="this.value = '';">
 
-                <!-- error_text (一つでもエラーがあれば) -->
-                <p class="error_text">
-                    {{ $errors->all()? '画像ファイルを入れ直してください。': '' }}
-                </p>
+            <!-- error_text (一つでもエラーがあれば) -->
+            <p class="error_text">
+                {{ $errors->all()? '画像ファイルを入れ直してください。': '' }}
+            </p>
 
-                <!-- error_text (画像にエラー原因があるとき) -->
-                @error('image')
-                    <p class="error_text">{{ $message }}</p>
-                @enderror
-            </label>
+            <!-- error_text (画像にエラー原因があるとき) -->
+            @error('image')
+                <p class="error_text">{{ $message }}</p>
+            @enderror
         </div>
 
 
@@ -205,34 +184,35 @@
         <div class="form_group">
             <label>
                 <!-- field_text -->
-                <div class="form_name">お持ちのディバイス</div>
+                <label>お持ちのディバイス</label>
 
                 <!-- field_input -->
                 @foreach ($select_element['divises'] as $divise)
 
                     @if ( old('divises') ) <!-- (エラーがあるとき) -->
 
-                        <label>
-                            <input type="checkbox" name="divises[]" value="{{ $divise->value }}"
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="divises[]" value="{{ $divise->value }}" id="{{$divise->form_id}}"
                             {{ in_array( $divise->value, old('divises') )?  'checked': ''}}>
-                            {{ $divise->text }}
-                        </label>
+
+                            <label class="form-check-label" for="{{$divise->form_id}}"> {{ $divise->text }} </label> <!-- (テキスト) -->
+                        </div>
 
                     @elseif($errors->all()) <!-- (エラーがあり、チェックボックスになにもチェックがないとき) -->
 
-                        <label>
-                            <input type="checkbox" name="divises[]" value="{{ $divise->value }}">
-                            {{ $divise->text }}
-                        </label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="divises[]" value="{{ $divise->value }}" id="{{$divise->form_id}}">
+                            <label class="form-check-label" for="{{$divise->form_id}}"> {{ $divise->text }} </label>　<!-- (テキスト) -->
+                        </div>
 
                     @else <!-- (エラーがないとき) -->
 
-                        <label>
-                            <input type="checkbox" name="divises[]" value="{{ $divise->value }}"
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="divises[]" value="{{ $divise->value }}" id="{{$divise->form_id}}"
                             {{ $divise->checked? 'checked': ''}}>
-                            {{ $divise->text }}
-                        </label>
 
+                            <label class="form-check-label" for="{{$divise->form_id}}"> {{ $divise->text }} </label>　<!-- (テキスト) -->
+                        </div>
                     @endif
 
                 @endforeach
@@ -249,40 +229,39 @@
 
         {{-- ラジオボタン入力 --}}
         <div class="form_group">
-            <label>
-                <!-- field_text -->
-                <div class="form_name">性別(必須)</div>
+
+            <!-- field_text -->
+            <label>性別 <span class="badge badge-danger">必須</span></label>
+
+            <!-- field_input -->
+            @foreach ($select_element['genders'] as $gender)
+
+                @if ( old('gender') ) <!-- (エラーがあるとき) -->
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" value="{{ $gender->value }}" id="{{ $gender->form_id }}"
+                        {{ old('gender')== $gender->value? 'checked': ''}}>
+                        <label class="form-check-label" for="{{ $gender->form_id }}"> {{ $gender->text }} </label>
+                    </div>
+
+                @else  <!-- (エラーがないとき) -->
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" value="{{ $gender->value }}" id="{{ $gender->form_id }}"
+                        {{ $gender->checked? 'checked': ''}}>
+
+                        <label class="form-check-label" for="{{ $gender->form_id }}"> {{ $gender->text }} </label>
+                    </div>
+
+                @endif
+
+            @endforeach
 
 
-                <!-- field_input -->
-                @foreach ($select_element['genders'] as $gender)
-
-                    @if ( old('gender') )
-
-                        <label>
-                            <input type="radio" name="gender" value="{{ $gender->value }}"
-                            {{ old('gender')== $gender->value? 'checked': ''}}>
-                            {{ $gender->text }}
-                        </label>
-
-                    @else
-
-                        <label>
-                            <input type="radio" name="gender" value="{{ $gender->value }}"
-                            {{ $gender->checked? 'checked': ''}}>
-                            {{ $gender->text }}
-                        </label>
-
-                    @endif
-
-                @endforeach
-
-
-                <!-- error_text -->
-                <p class="error_text">
-                    {{ $errors->has('gender')? $errors->first('gender'): '' }}
-                </p>
-            </label>
+            <!-- error_text -->
+            <p class="error_text">
+                {{ $errors->has('gender')? $errors->first('gender'): '' }}
+            </p>
         </div>
 
 
@@ -290,13 +269,12 @@
 
         {{-- セレクト要素入力 --}}
         <div class="form_group">
-            <label>
-                <!-- field_text -->
-                <div class="form_name">年代(必須)</div>
+            <!-- field_text -->
+            <label class="form-label" for="{{ $form_id['age_group'] }}">年代(必須)</label>
 
 
-                <!-- field_input -->
-                <select name="age_group">
+            <!-- field_input -->
+            <select class="form-control" name="age_group" id="{{ $form_id['age_group'] }}">
                 @foreach ($select_element['age_groups'] as $age_group)
 
                     @if ( old('gender') )
@@ -308,16 +286,16 @@
 
                     @else
 
-                        <option value="{{ $age_group->value }}"
-                            {{ $age_group->selected? 'selected': ''}}>
+                        <option value="{{ $age_group->value }}" {{ $age_group->selected? 'selected': ''}}>
                             {{ $age_group->text }}
                         </option>
+
 
                     @endif
 
                 @endforeach
-                </select>
-            </label>
+            </select>
+
         </div>
 
 
@@ -325,24 +303,25 @@
 
         {{-- テキストエリア入力 --}}
         <div class="form_group">
-            <label>
-                <!-- field_text -->
-                <div class="form_name">特記事項</div>
+            <!-- field_text -->
+            <label class="form-label" for="{{ $form_id['remarks'] }}">特記事項</label>
 
-                <!-- field_input -->
-                @if ($form == 'create')
-                    <textarea name="remarks">特記事項があれば記入してください。</textarea>
+            <!-- field_input -->
+            @if ($form == 'create')
+                <textarea type="text" name="remarks" class="form-control" placeholder="特記事項を記入。"
+                id="{{ $form_id['remarks'] }}" ></textarea>
 
-                @elseif ($form == 'edit')
-                    <textarea name="remarks">{{ old('remarks', $customer->remarks) }}</textarea>
+            @elseif ($form == 'edit')
+                <textarea type="text" name="remarks" class="form-control"
+                id="{{ $form_id['remarks'] }}">{{ old('remarks', $customer->remarks) }}</textarea>
 
-                @endif
+            @endif
 
-                <!-- error_text -->
-                <p class="error_text">
-                    {{ $errors->has('remarks')? $errors->first('remarks'): '' }}
-                </p>
-            </label>
+            <!-- error_text -->
+            <p class="error_text">
+                {{ $errors->has('remarks')? $errors->first('remarks'): '' }}
+            </p>
+
         </div>
 
 
@@ -350,25 +329,54 @@
 
         <div class="form_group">
 
-
             <div class="submit_group">
                 @if ($form == 'create')
-                    <button type="submit">新規登録</button>
+                    <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="##modalCenter">
+                        新規登録
+                    </button>
+
                 @elseif ($form == 'edit')
-                    <button type="submit">上書き保存</button>
+                    <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#modalCenter">
+                        上書き保存
+                    </button>
+
                 @endif
 
+                <button class="btn btn-outline-primary btn-lg" type="button" onclick=" location.href='{{ route('form.list') }}' ">
+                    戻る
+                </button>
 
-                <button type="button" onclick=" location.href='{{ route('form.list') }}' ">戻る</button>
             </div>
 
-
-            <div  class="submit_group">
-                <a href="">ホーム</a>
-                <a href="">お問い合わせ</a>
-                <a href="">プライバシー</a>
+            <div class="submit_group">
+                <a href="" class="btn btn-link">お問い合わせ</a>
+                <a href="" class="btn btn-link">ホーム</a>
+                <a href="" class="btn btn-link">プライバシー</a>
             </div>
         </div>
+
+
+
+
+        {{-- Modal(確認モーダル) --}}
+        @php
+            $modal = [];
+            if ($form == 'create') {
+                $modal = [
+                    'title' => '入力内容の新規登録',
+                    'body' => 'この内容で新規登録します。</br>よろしいですか？',
+                ];
+            }
+            elseif (($form == 'edit')) {
+                $modal = [
+                    'title' => '入力内容の上書き保存',
+                    'body' => 'この内容で上書き保存します。</br>よろしいですか？',
+                ];
+            }
+        @endphp
+
+        @include('includes.component.modal')
+
 
 
     </form>
