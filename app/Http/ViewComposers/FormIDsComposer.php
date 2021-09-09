@@ -4,7 +4,7 @@ namespace App\Http\ViewComposers;
 use Illuminate\View\View;
 
 
-class FormFieldsComposer
+class FormIDsComposer
 {
     /**
      * フォームで入力するフィールドの設定オブジェクトを登録する。
@@ -15,13 +15,14 @@ class FormFieldsComposer
     public function compose(View $view)
     {
 
-
+        // アッパーキャメルケース変換関数
         function convertUpperCamelCase($str)
         {
             return strtr( ucwords( strtr($str, ['_' => ' ']) ),  [' ' => ''] );
         }
 
 
+        // 変数の追加
         $view->with([
 
 

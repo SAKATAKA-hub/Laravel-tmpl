@@ -46,6 +46,6 @@ Route::patch('/form/update/{customer}', [FormController::class, 'update'])
 
 
 # 登録内容削除処理(destroy)
-Route::delete('/form/destroy/{customer}', [FormController::class, 'destroy'])
+Route::delete('/form/destroy', [FormController::class, 'destroy'])
     ->name('form.destroy');
 

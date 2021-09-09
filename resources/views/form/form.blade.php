@@ -13,39 +13,7 @@
 @section('style')
 <link href="{{ asset('css/form.css') }}" rel="stylesheet">
 <!-- bootstrap -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-{{-- <style>
-
-.form_head{
-    padding: 2rem;
-    text-align: center;
-}
-
-
-
-
-.form_group{
-    padding: 1em 3rem;
-    border-top: solid 1px #eee;
-}
-
-    .item_image{
-        width: 100px;
-        height: 100px;
-        margin-bottom: .5rem;
-        border-radius: 10px;
-        border: solid 1px #bbb;
-        display: block;
-    }
-
-
-
-
-.submit_group{
-    margin-bottom: 1em;
-    text-align: center;
-}
-</style> --}}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 @endsection
 
 
@@ -53,14 +21,12 @@
 
 @section('script')
 <!-- bootstrap -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
 
 <!-- preview_image -->
 <script src="{{ asset('js/common/preview_image.js') }}"></script>
-{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
-
 @endsection
 
 
@@ -71,6 +37,8 @@
 
 
 @section('main.center_contents')
+
+
 
 
 
@@ -87,41 +55,32 @@
     @endif
 
 
-
-
         <div class="form_head">
             @if ($form == 'create')
                 <h2>お客様情報新規登録</h2>
             @elseif ($form == 'edit')
                 <h2>お客様情報修正</h2>
             @endif
-
-            {{-- アラートメッセージ --}}
-            <div class=" alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-             </div>
         </div>
 
 
         <div class="form_group">
              <!-- field_text -->
-            <label class="form-label" for="{{ $form_id['name'] }}">お名前 <span class="badge badge-danger">必須</span></label>
+            <label class="form-label" for="{{ $form_id['name'] }}">
+                お名前 <span class="badge bg-danger">必須</span>
+            </label>
 
             <!-- field_input -->
             @if ($form == 'create')
-                <input class="form-control" type="text" name="name" value="{{ old('name')}}"" id="{{ $form_id['name'] }}" placeholder="苗字　名前" required>
+                <input class="form-control" type="text" name="name" value="{{ old('name')}}"" id="{{ $form_id['name'] }}" placeholder="苗字　名前">
             @elseif ($form == 'edit')
-                <input class="form-control" type="text" name="name" value="{{ old('name', $customer->name) }}"" id="input_name" placeholder="苗字　名前" required>
+                <input class="form-control" type="text" name="name" value="{{ old('name', $customer->name) }}"" id="input_name" placeholder="苗字　名前">
             @endif
 
             <!-- error_text -->
-            <p style="color:red;margin-top:.5em;">jsエラーメッセージ</p>
-            <p class="error_text">
-                {{ $errors->has('name')? $errors->first('name'): '' }}
-            </p>
+            @error('name')
+                <p class="mt-2 text-danger">{{ 'エラー：'.$message }}</p>
+            @enderror
         </div>
 
 
@@ -129,20 +88,21 @@
 
         <div class="form_group">
             <!-- field_text -->
-            <label class="form-label" for="{{ $form_id['email'] }}">メールアドレス</label>
+            <label class="form-label" for="{{ $form_id['email'] }}">
+                メールアドレス
+            </label>
 
             <!-- field_input -->
             @if ($form == 'create')
-                <input  class="form-control" type="email" name="email" value="{{ old('email')}}" id="{{ $form_id['email'] }}" placeholder="例)email@email.co.jp" required>
+                <input  class="form-control" type="email" name="email" value="{{ old('email')}}" id="{{ $form_id['email'] }}" placeholder="例)email@email.co.jp">
             @elseif ($form == 'edit')
-                <input  class="form-control" type="email" name="email" value="{{ old('email', $customer->email) }}" id="{{ $form_id['email'] }}" placeholder="例)email@email.co.jp" required>
+                <input  class="form-control" type="email" name="email" value="{{ old('email', $customer->email) }}" id="{{ $form_id['email'] }}" placeholder="例)email@email.co.jp">
             @endif
 
             <!-- error_text -->
-            <p style="color:red;margin-top:.5em;">jsエラーメッセージ</p>
-            <p class="error_text">
-                {{ $errors->has('name')? $errors->first('name'): '' }}
-            </p>
+            @error('email')
+                <p class="mt-2 text-danger">{{ 'エラー：'.$message }}</p>
+            @enderror
         </div>
 
 
@@ -152,7 +112,9 @@
         {{-- 画像入力 --}}
         <div class="form_group">
             <!-- field_text -->
-            <lavel class="form-label" for="{{ $form_id['image'] }}">画像</lavel>
+            <lavel class="form-label" for="{{ $form_id['image'] }}">
+                画像
+            </lavel>
 
             <!-- image -->
             @if ($form == 'create')
@@ -163,17 +125,18 @@
             @endif
 
             <!-- field_input -->
-            <input class="form-control-file" type="file" name="image" id="{{ $form_id['image'] }}" onchange="setImage(this);" onclick="this.value = '';">
+            <input class="form-control" type="file" name="image" id="{{ $form_id['image'] }}" onchange="setImage(this);" onclick="this.value = '';">
 
             <!-- error_text (一つでもエラーがあれば) -->
-            <p class="error_text">
+            <p class="mt-2 text-danger">
                 {{ $errors->all()? '画像ファイルを入れ直してください。': '' }}
             </p>
 
             <!-- error_text (画像にエラー原因があるとき) -->
             @error('image')
-                <p class="error_text">{{ $message }}</p>
+                <p class="mt-2 text-danger">{{ 'エラー：'.$message }}</p>
             @enderror
+
         </div>
 
 
@@ -184,7 +147,9 @@
         <div class="form_group">
             <label>
                 <!-- field_text -->
-                <label>お持ちのディバイス</label>
+                <label>
+                    お持ちのディバイス
+                </label>
 
                 <!-- field_input -->
                 @foreach ($select_element['divises'] as $divise)
@@ -218,9 +183,7 @@
                 @endforeach
 
                 <!-- error_text -->
-                <p class="error_text">
-                    {{ $errors->has('divises[]')? $errors->first('divises[]'): '' }}
-                </p>
+
             </label>
         </div>
 
@@ -231,7 +194,9 @@
         <div class="form_group">
 
             <!-- field_text -->
-            <label>性別 <span class="badge badge-danger">必須</span></label>
+            <label>
+                性別 <span class="badge bg-danger">必須</span>
+            </label>
 
             <!-- field_input -->
             @foreach ($select_element['genders'] as $gender)
@@ -258,10 +223,10 @@
             @endforeach
 
 
-            <!-- error_text -->
-            <p class="error_text">
-                {{ $errors->has('gender')? $errors->first('gender'): '' }}
-            </p>
+                <!-- error_text -->
+                @error('gender')
+                    <p class="mt-2 text-danger">{{ 'エラー：'.$message }}</p>
+                @enderror
         </div>
 
 
@@ -270,11 +235,16 @@
         {{-- セレクト要素入力 --}}
         <div class="form_group">
             <!-- field_text -->
-            <label class="form-label" for="{{ $form_id['age_group'] }}">年代(必須)</label>
+            <label class="form-label" for="{{ $form_id['age_group'] }}">
+                年代 <span class="badge bg-danger">必須</span>
+            </label>
 
 
             <!-- field_input -->
-            <select class="form-control" name="age_group" id="{{ $form_id['age_group'] }}">
+            <select class="form-select" name="age_group" id="{{ $form_id['age_group'] }}">
+
+                <option value="">選択してください。</option>
+
                 @foreach ($select_element['age_groups'] as $age_group)
 
                     @if ( old('gender') )
@@ -296,6 +266,10 @@
                 @endforeach
             </select>
 
+            <!-- error_text -->
+            @error('age_group')
+                <p class="mt-2 text-danger">{{ 'エラー：'.$message }}</p>
+            @enderror
         </div>
 
 
@@ -318,9 +292,9 @@
             @endif
 
             <!-- error_text -->
-            <p class="error_text">
-                {{ $errors->has('remarks')? $errors->first('remarks'): '' }}
-            </p>
+            @error('remarks')
+                <p class="mt-2 text-danger">{{ 'エラー：'.$message }}</p>
+            @enderror
 
         </div>
 
@@ -331,18 +305,20 @@
 
             <div class="submit_group">
                 @if ($form == 'create')
-                    <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="##modalCenter">
+
+                    <button class="btn btn-primary btn-lg fw-bold"  type="button" data-bs-toggle="modal" data-bs-target="#centerModal">
                         新規登録
                     </button>
 
                 @elseif ($form == 'edit')
-                    <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#modalCenter">
+
+                    <button class="btn btn-primary btn-lg fw-bold"  type="button" data-bs-toggle="modal" data-bs-target="#centerModal">
                         上書き保存
                     </button>
 
                 @endif
 
-                <button class="btn btn-outline-primary btn-lg" type="button" onclick=" location.href='{{ route('form.list') }}' ">
+                <button class="btn btn-outline-primary btn-lg fw-bold" type="button" onclick=" location.href='{{ route('form.list') }}' ">
                     戻る
                 </button>
 
@@ -364,13 +340,15 @@
             if ($form == 'create') {
                 $modal = [
                     'title' => '入力内容の新規登録',
-                    'body' => 'この内容で新規登録します。</br>よろしいですか？',
+                    'body' => 'この内容で新規登録します。\nよろしいですか？',
+                    'yes_btn' => '新規登録',
                 ];
             }
             elseif (($form == 'edit')) {
                 $modal = [
-                    'title' => '入力内容の上書き保存',
-                    'body' => 'この内容で上書き保存します。</br>よろしいですか？',
+                    'title' => '入力内容の上書き登録',
+                    'body' => 'この内容で上書き登録します。\nよろしいですか？',
+                    'yes_btn' => '上書き登録',
                 ];
             }
         @endphp

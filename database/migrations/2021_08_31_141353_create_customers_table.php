@@ -16,7 +16,7 @@ class CreateCustomersTable extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name',50)->comment('氏名');
-            $table->string('email',50)->comment('メールアドレス');
+            $table->string('email',50)->comment('メールアドレス')->nullable()->default(null);
             $table->string('image',100)->comment('画像')->nullable()->default(null);
             $table->string('divises',50)->comment('ディバイス')->nullable()->default(null);
             $table->string('gender',50)->comment('性別');

@@ -24,6 +24,10 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         // form入力ページ
-        View::composer('form.form','App\Http\ViewComposers\FormFieldsComposer');
+        View::composer('form.form','App\Http\ViewComposers\FormIDsComposer');
+
+        // list表示ページ
+        View::composer('form.list','App\Http\ViewComposers\alertComposer');
+
     }
 }

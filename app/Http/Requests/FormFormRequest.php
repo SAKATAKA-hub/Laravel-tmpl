@@ -25,7 +25,7 @@ class FormFormRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'email',
+            'email' => 'nullable|email',
             'image' => 'file|max:1600|mimes:jpeg,png,jpg,pdf',
             'gender' => 'required',
             'age_group' => 'required',
@@ -50,8 +50,8 @@ class FormFormRequest extends FormRequest
             'image.max' => '1.6MBを超えるファイルは添付できません。',
             'image.mims' => '指定のファイル形式以外は添付できません。',
 
-            'gender.required' => '入力必須です。',
-            'age_group.required' => '入力必須です。',
+            'gender.required' => '性別を選択してください。',
+            'age_group.required' => '年代を選択してください。',
             'remarks.max' => '文章は255文字以内で入力してください。',
         ];
     }

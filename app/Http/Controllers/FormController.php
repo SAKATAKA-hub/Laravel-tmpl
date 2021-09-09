@@ -89,7 +89,11 @@ class FormController extends Controller
 
 
         return redirect()->route('form.list')
-        ->with('popup_message',$request->name.'さんの情報を新規登録しました。');
+        ->with([ //アラート表示のセッション変数を追加
+            'alert_name' => $request->name,
+            'alert_process' => 'store',
+        ]);
+
     }
 
 
@@ -141,7 +145,12 @@ class FormController extends Controller
 
 
         return redirect()->route('form.list')
-        ->with('popup_message',$request->name.'さんの情報を修正しました。');
+        ->with([ //アラート表示のセッション変数を追加
+            'alert_name' => $request->name,
+            'alert_process' => 'update',
+        ]);
+
+
     }
 
 
@@ -154,17 +163,19 @@ class FormController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(Request $request, Customer $customer)
+    public function destroy(Request $request)
     {
-        return $request->customer_id;
-
+        $customer = Customer::find($request->customer_id);
 
         // データの削除
         $customer->delete();
 
 
         return redirect()->route('form.list')
-        ->with('popup_message',$customer->name.'さんの情報を削除しました。');
+        ->with([ //アラート表示のセッション変数を追加
+            'alert_name' => $customer->name,
+            'alert_process' => 'destroy',
+        ]);
     }
 
 

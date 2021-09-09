@@ -72,7 +72,7 @@
 
     <div class="item_group">
         <div  class="item_name">ご意見</div>
-        <div class="item_value">{{ $customer->remarks }}</div>
+        <div class="item_value">{!! nl2br( e($customer->remarks) ) !!}</div>
     </div>
 
 

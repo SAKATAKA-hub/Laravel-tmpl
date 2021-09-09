@@ -13,7 +13,7 @@
 @section('style')
 <link href="{{ asset('css/list.css') }}" rel="stylesheet">
 <!-- bootstrap -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 <style>
     .popup_message{
         width: 100%;
@@ -30,9 +30,9 @@
 
 @section('script')
 <!-- bootstrap -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
 
 <script src="{{ asset('js/common/delete_modal.js') }}"></script>
 @endsection
@@ -47,13 +47,22 @@
 @section('main.center_contents')
 
 
-    @if ( session('popup_message') )
-        <div class="popup_message">{{ session('popup_message') }}</div>
-    @endif
+
 
     <div class="list_head">
         <h2>お客様情報一覧</h2>
-        <a href="{{route('form.create')}}"><button class="btn btn-outline-info">新規登録</button></a>
+
+        {{-- alert --}}
+        @if ( $process = session('alert_process') )
+            <div class=" alert {{$alert[$process]['color']}} alert-dismissible fade show" role="alert">
+
+                <strong>{{ session('alert_name') }}</strong>{{ $alert[$process]['message'] }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+            </div>
+        @endif
+
+        <a href="{{route('form.create')}}"><button class="btn btn-outline-primary fw-bold">新規登録</button></a>
     </div>
 
 
@@ -68,7 +77,7 @@
                 <img class="list_image" src="{{ asset('storage/'.$customer->image) }}">
             </td>
             <td>
-                <div class="list_title">{{ $customer->name }}</div>
+                <div class="list_title">{{ $customer->name }} 様</div>
             </td>
             <td>
                 <div>{{ $customer->gender }}</div>
@@ -86,7 +95,7 @@
                 <a href="{{ route('form.edit',$customer) }}"><button>編集</button></a>
             </td>
             <td>
-                <button type="button" value="{{ $customer->id }}" data-toggle="modal" data-target="#modalCenter" onclick="deletModalInput(this)">
+                <button class=""  type="button" value="{{ $customer->id }}" data-bs-toggle="modal" data-bs-target="#centerModal"  onclick="deletModalInput(this)">
                     削除
                 </button>
             </td>
@@ -112,27 +121,27 @@
 
 
 
-
     {{-- Modal(データ削除モーダル) --}}
-    <form action="{{ route('form.destroy',1) }}" method="POST">
+    <form action="{{ route('form.destroy') }}" method="POST">
         @method('DELETE')
         @csrf
         <input type="hidden" name="customer_id" value="" id="deleteInputElement">
         @php
             $modal = [
-                    'title' => 'お客様情報の削除',
-                    'body' => 'お客様情報を1件削除します。</br>よろしいですか？',
+                'title' => 'お客様情報の削除',
+                'body' => 'お客様情報を1件削除します。\nよろしいですか？',
+                'yes_btn' => '削除',
             ];
         @endphp
         @include('includes.component.modal')
     </form>
     <!-----------------------------------------------------------------
         * 削除ボタン
-        <button class="btn btn-outline-secondary" type="button" value="{{ $customer->id }}" data-toggle="modal" data-target="#modalCenter" onclick="deletModalInput(this)">
+        <button class=""  type="button" value="{{ $customer->id }}" data-bs-toggle="modal" data-bs-target="#centerModal"  onclick="deletModalInput(this)">
             削除
         </button>
 
-        * js読込み
+        * js読込み (deletModalInput関数)
         <script src="{ aseet('js/common/delete_modal.js') }}"></script>
     -------------------------------------------------------------------->
 
