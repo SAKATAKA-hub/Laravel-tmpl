@@ -47,7 +47,7 @@
 @section('main.center_contents')
 
 
-
+    <div class="m-2">{{ Breadcrumbs::render('list') }}</div>
 
     <div class="list_head">
         <h2>お客様情報一覧</h2>

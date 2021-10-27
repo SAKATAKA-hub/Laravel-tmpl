@@ -74,7 +74,7 @@
             @if ($form == 'create')
                 <input class="form-control" type="text" name="name" value="{{ old('name')}}"" id="{{ $form_id['name'] }}" placeholder="苗字　名前">
             @elseif ($form == 'edit')
-                <input class="form-control" type="text" name="name" value="{{ old('name', $customer->name) }}"" id="input_name" placeholder="苗字　名前">
+                <input class="form-control" type="text" name="name" value="{{ old('name', $customer->name) }}" id="input_name" placeholder="苗字　名前">
             @endif
 
             <!-- error_text -->
@@ -256,7 +256,8 @@
 
                     @else
 
-                        <option value="{{ $age_group->value }}" {{ $age_group->selected? 'selected': ''}}>
+                        <option value="{{ $age_group->value }}"
+                            {{ $age_group->selected? 'selected': ''}}>
                             {{ $age_group->text }}
                         </option>
 

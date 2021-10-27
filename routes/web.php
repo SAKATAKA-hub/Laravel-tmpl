@@ -1,7 +1,46 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\FormController;
+
+
+/*
+|--------------------------------------------------------
+| ログイン認証
+|--------------------------------------------------------
+*/
+
+# ログイン画面の表示(login_form)
+Route::get('login_form',[AuthController::class,'login_form'])
+->name('login_form');
+
+# ログイン処理(login)
+Route::post('login',[AuthController::class,'login'])
+->name('login');
+
+# ログアウト処理(logout)
+Route::post('logout',[AuthController::class,'logout'])
+->name('logout');
+
+
+
+# ユーザー登録画面の表示(get_register)
+Route::get('get_register',[AuthController::class,'get_register'])
+->name('get_register');
+
+# ユーザー登録処理(post_register)
+Route::post('post_register',[AuthController::class,'post_register'])
+->name('post_register');
+
+// ログイン前は表示不可
+Route::middleware(['auth'])->group(function () {
+    # ホームページの表示
+    Route::get('home',function() {
+        return view('login.home');
+    })->name('home');
+
+});
 
 /*
 |--------------------------------------------------------------------------

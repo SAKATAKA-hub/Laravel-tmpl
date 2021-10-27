@@ -29,6 +29,7 @@
 
 
 @section('main.center_contents')
+
     <div class="item_head">
         <h2>お客様情報</h2>
     </div>
