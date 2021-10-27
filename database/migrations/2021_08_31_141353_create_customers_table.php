@@ -21,7 +21,7 @@ class CreateCustomersTable extends Migration
             $table->string('divises',50)->comment('ディバイス')->nullable()->default(null);
             $table->string('gender',50)->comment('性別');
             $table->string('age_group',50)->comment('電話番号');
-            $table->string('remarks',)->comment('特記事項')->nullable()->default('特になし。');
+            $table->string('remarks',100)->comment('特記事項')->nullable()->default('特になし。');
             $table->timestamps();
         });
     }

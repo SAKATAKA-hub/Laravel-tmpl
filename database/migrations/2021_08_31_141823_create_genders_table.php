@@ -15,9 +15,9 @@ class CreateGendersTable extends Migration
     {
         Schema::create('genders', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('value');
-            $table->string('text');
+            $table->string('name',100);
+            $table->string('value',100);
+            $table->string('text',100);
             $table->boolean('checked')->default(0);
             $table->timestamps();
         });

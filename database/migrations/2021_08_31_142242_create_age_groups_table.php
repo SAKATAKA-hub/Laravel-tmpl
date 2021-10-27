@@ -15,9 +15,9 @@ class CreateAgeGroupsTable extends Migration
     {
         Schema::create('age_groups', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('value');
-            $table->string('text');
+            $table->string('name',100);
+            $table->string('value',100);
+            $table->string('text',100);
             $table->boolean('selected')->default(0);
             $table->timestamps();
         });
