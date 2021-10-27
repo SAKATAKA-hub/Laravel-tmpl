@@ -49,14 +49,20 @@ return [
             'url' => env('DATABASE_URL'),
 
 
-            'host' => $db['host'], // 'host' => env('DB_HOST', '127.0.0.1'),
-            'database' => ltrim($db['path'],'/'), // 'database' => env('DB_DATABASE', 'forge'),
-            'username' => $db['user'], // 'username' => env('DB_USERNAME', 'forge'),
-            'password' => $db['pass'], // 'password' => env('DB_PASSWORD', ''),
+            'host' => $db['host'],
+            'database' => ltrim($db['path'],'/'),
+            'username' => $db['user'],
+            'password' => $db['pass'],
+            'charset' => 'utf8',
+
+            // 'host' => env('DB_HOST', '127.0.0.1'),
+            // 'database' => env('DB_DATABASE', 'forge'),
+            // 'username' => env('DB_USERNAME', 'forge'),
+            // 'password' => env('DB_PASSWORD', ''),
+            // 'charset' => 'utf8mb4',
 
             'port' => env('DB_PORT', '3306'),
             'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
             'prefix_indexes' => true,
