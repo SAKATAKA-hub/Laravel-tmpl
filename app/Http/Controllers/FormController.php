@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\FormFormRequest;
@@ -19,6 +20,7 @@ class FormController extends Controller
      */
     public function list()
     {
+
         $customers = Customer::paginate(5);
 
         return view('form.list',compact('customers') );
@@ -223,7 +225,38 @@ class FormController extends Controller
             }
         }
 
+        // // AWS-S3へのアップロード
+        // # アップロードする画像があるとき
+        // if($request_file = $request->file('image'))
+        // {
+        //     $num = Customer::orderBy('id','desc')->first()->id +1; //顧客番号
+
+        //     $extension = $request_file->extension(); //拡張子
+
+        //     $file_name = sprintf('%04d', $num).'.'.$extension; //ファイル
+
+        //     // $image_path = $request_file->storeAs($dir,$file_name); //画像のアップロード
+        //     $image_path = Storage::disk('s3')->putFile('/', $request_file, 'public');
+        //     // $image_path = Storage::disk('s3')->putFileAs($dir, $request_file, $file_name, 'public');
+
+        // }
+        // # アップロードする画像がないとき
+        // else
+        // {
+        //     if  ($request->has('old_image') ) //以前に画像をアップロードしているとき
+        //     {
+        //         $image_path = $request->old_image; //(以前アップロードした画像のパス)
+        //     }
+        //     else
+        //     {
+        //         $image_path = $no_image;
+        //     }
+        // }
+
+
         return $image_path;
+
+        // return Storage::disk('s3')->url($image_path);
     }
 
 

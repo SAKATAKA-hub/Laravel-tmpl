@@ -10,7 +10,6 @@ class AgeGroup extends Model
     use HasFactory;
 
     # データ挿入設定
-
     protected $fillable = [
         'name','value','text',
     ];
