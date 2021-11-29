@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AsynchronousCommunicationController;
+use App\Http\Controllers\VueController;
 
 # home
 Route::get('/', function(){
@@ -110,3 +111,22 @@ Route::post('/memo/store', [AsynchronousCommunicationController::class, 'store']
 # メモの削除(destoroy)
 Route::delete('/memo/destoroy/{memo}', [AsynchronousCommunicationController::class, 'destoroy'])
 ->name('memo.destoroy');
+
+
+
+
+/*
+|--------------------------------------------------------
+| Vue.jsのＣDN利用とAPIの取得
+|--------------------------------------------------------
+*/
+# test
+Route::get('vue/index',function(){
+    return view('vue.index');
+})->name('vue.index');
+
+# API受取り
+Route::post('vue/api',[VueController::class,'api'])
+->name('vue.api');
+
+

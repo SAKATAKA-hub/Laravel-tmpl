@@ -20,9 +20,6 @@
         .container{
             padding-left: 32px;
         }
-        li[class="hidden"]{
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -57,6 +54,12 @@
         </ul>
     </div>
 
+
+
+
+
+
+
     <script>
         'use strict';
 
@@ -68,10 +71,6 @@
         const post = document.getElementById('post');
         // 入力された値の一覧
         const ul = document.querySelector('ul');
-        // 全ての削除ボタン
-        let deleteBtns =  document.querySelectorAll('.deleteBtn');
-
-
 
 
 
@@ -85,9 +84,8 @@
             // ページ遷移防止
             e.preventDefault();
 
+            // 入力内容を変数に保存
             const postValue = post.value;
-
-            console.log(postValue);
 
             // 非同期通信
             fetch(postForm.dataset.url, {
@@ -99,7 +97,6 @@
             })
             .then(response => response.json())
             .then(json => {
-                console.log(json.id)
 
                 // 新しい値の要素を追加する
                 const newElement = document.createElement('li');
@@ -107,22 +104,10 @@
                 const destoroyUrl = postForm.dataset.destoroy_url;
                 const span ='<span class="deleteBtn" data-url="'+ destoroyUrl + '/' + json.id +'"> [×]</span>';
 
-
                 newElement.innerHTML = postValue + span;
                 ul.insertBefore(newElement, ul.querySelectorAll('li')[0]);
 
-                console.log(ul);
-
-                // 全ての削除ボタンの更新
-                deleteBtns =  document.querySelectorAll('.deleteBtn');
-                console.log(deleteBtns);
-
-
-            })
-            ;
-
-
-
+            });
 
             // 入力枠を空白に戻す
             post.value = '';
@@ -134,30 +119,30 @@
         //----------------------------------------------------------------
         // メモの削除
         //----------------------------------------------------------------
-        deleteBtns.forEach( (deleteBtn, index) => {
+        ul.addEventListener('click', e=>{
 
             // [×]ボタンがクリックされた時
-            deleteBtn.addEventListener('click',()=>{
+            if(e.target.classList.contains('deleteBtn')){
 
                 // データの送信
-                const url = deleteBtn.dataset.url;
-                const options = {
+                fetch(e.target.dataset.url,{
                     method: 'POST',
                     body: new URLSearchParams({
                         _method: 'delete', //メソッド('update','delete'のとき)
                         _token: token,
                     }),
-                };
-                fetch(url, options);
+                });
 
-                // 削除要素を非表示にする
-                deleteBtn.parentNode.classList.add('hidden')
+                // 要素を削除する
+                e.target.parentNode.remove();
 
-                console.log('delete'+index);
+                console.log('delete');
 
 
-            });
+            }
         });
+
+
 
     </script>
 </body>
