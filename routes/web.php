@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AsynchronousCommunicationController;
 use App\Http\Controllers\VueController;
+use App\Http\Controllers\MailSendController;
 
 # home
 Route::get('/', function(){
@@ -129,4 +130,18 @@ Route::get('vue/index',function(){
 Route::post('vue/api',[VueController::class,'api'])
 ->name('vue.api');
 
+
+
+/*
+|--------------------------------------------------------
+| メールの送信
+|--------------------------------------------------------
+*/
+Route::get('mail/input', function(){
+    return view('emails.input');
+})
+->name('mail.input');
+
+Route::post('mail/send', [MailSendController::class, 'mail'])
+->name('mail.send');
 
